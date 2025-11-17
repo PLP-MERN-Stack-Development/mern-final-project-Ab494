@@ -5,8 +5,8 @@
   # Command to build the frontend with legacy peer deps fix
   command = "npm install --legacy-peer-deps && npm run build"
   
-  # Directory that gets published
-  publish = "frontend/dist"
+  # Directory that gets published (relative to base directory)
+  publish = "dist"
 
 [build.environment]
   # Node.js version
