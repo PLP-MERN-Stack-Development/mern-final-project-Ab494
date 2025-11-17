@@ -2,8 +2,8 @@
   # Base directory where the build command should run
   base = "frontend"
   
-  # Command to build the frontend
-  command = "npm install && npm run build"
+  # Command to build the frontend with legacy peer deps fix
+  command = "npm install --legacy-peer-deps && npm run build"
   
   # Directory that gets published
   publish = "frontend/dist"
@@ -11,6 +11,9 @@
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
+  
+  # Use legacy peer deps to resolve React 19 conflicts
+  NPM_CONFIG_LEGACY_PEER_DEPS = "true"
   
   # Skip unnecessary installations for faster builds
   NPM_FLAGS = "--production=false"

@@ -175,6 +175,7 @@ The project includes a pre-configured `netlify.toml` file that handles:
 
 **This configuration solves the deployment issue by:**
 - ✅ Setting the build directory to `frontend`
+- ✅ Using `--legacy-peer-deps` flag to resolve React 19/lucide-react conflicts
 - ✅ Properly installing dependencies and building the React app
 - ✅ Configuring SPA redirects for React Router
 - ✅ Optimizing caching headers for static assets
