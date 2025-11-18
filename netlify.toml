@@ -18,9 +18,50 @@
   # Skip unnecessary installations for faster builds
   NPM_FLAGS = "--production=false"
 
-# Redirects for SPA routing
+# Enhanced redirects for SPA routing - React Router support
 [[redirects]]
   from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Specific route redirects for better compatibility
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/resources"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/events"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/mentorship"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
   to = "/index.html"
   status = 200
 
