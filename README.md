@@ -2,6 +2,8 @@
 
 > **🚀 Deployment Ready!** This project is configured for deployment on Netlify (Frontend) and Render (Backend). See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
 
+> **🌐 Live Demo:** [https://women-empowermentsdgs.netlify.app/](https://women-empowermentsdgs.netlify.app/)
+
 ![Women Empowerment](https://img.shields.io/badge/Project-Women%20Empowerment-brightgreen) ![React](https://img.shields.io/badge/Frontend-React%2019.2.0-blue) ![Node.js](https://img.shields.io/badge/Backend-Node.js-green) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 A comprehensive MERN stack platform designed to empower women through education, mentorship, and community building. This platform provides resources, organizes events, facilitates mentorship connections, and tracks progress toward career advancement.
@@ -122,6 +124,7 @@ A comprehensive MERN stack platform designed to empower women through education,
    ```
 
 6. **Access the application**
+   - 🌐 **Live Demo:** [https://women-empowermentsdgs.netlify.app/](https://women-empowermentsdgs.netlify.app/)
    - Frontend: http://localhost:5174
    - Backend API: http://localhost:5000/api
    - API Health Check: http://localhost:5000/api/health
