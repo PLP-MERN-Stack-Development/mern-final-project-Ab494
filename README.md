@@ -1,481 +1,320 @@
 # Women Empowerment Portal
 
-A comprehensive MERN stack application designed to empower women worldwide through education, mentorship, and community building.
+> **🚀 Deployment Ready!** This project is configured for deployment on Netlify (Frontend) and Render (Backend). See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
 
-## 🌟 Project Overview
+![Women Empowerment](https://img.shields.io/badge/Project-Women%20Empowerment-brightgreen) ![React](https://img.shields.io/badge/Frontend-React%2019.2.0-blue) ![Node.js](https://img.shields.io/badge/Backend-Node.js-green) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-This capstone project addresses the global need for accessible education and mentorship opportunities for women. The Women Empowerment Portal provides a platform where women can:
+A comprehensive MERN stack platform designed to empower women through education, mentorship, and community building. This platform provides resources, organizes events, facilitates mentorship connections, and tracks progress toward career advancement.
 
-- Access curated educational resources
-- Join events and workshops
-- Connect with mentors and peers
-- Track their progress and growth
-- Contribute their own expertise and knowledge
+## 🌟 Features
 
-## 🎓 Academic Context
+### Core Functionality
+- **🔐 Authentication System** - Secure user registration, login, and session management
+- **📚 Resource Library** - Extensive collection of educational materials and career guides
+- **📅 Event Management** - Workshop registration and event tracking system
+- **👥 Mentorship Network** - Connect mentors and mentees based on skills and goals
+- **📊 Analytics Dashboard** - Track user progress and platform engagement
+- **🛡️ Admin Panel** - Comprehensive admin controls for platform management
+- **📱 Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- **🌙 Dark Mode Support** - Built-in dark/light theme switching
 
-**Important Note**: This project was developed as a team capstone project and was brought forward to Week 8 ahead of schedule. As a collaborative effort with teammates, other team members may submit similar versions of this project for their academic submissions. This Women Empowerment Portal represents our team's contribution to the final project requirements.
-
-## 🚀 Live Demo
-
-**Frontend**: [https://womenempowerhub2.netlify.app](https://womenempowerhub2.netlify.app)
-
-**Backend API**: Available upon request - contact the development team
-
-*Live application deployed and accessible*
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Environment Setup](#environment-setup)
-- [API Documentation](#api-documentation)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Architecture Decisions](#architecture-decisions)
-- [Future Enhancements](#future-enhancements)
-
-## ✨ Features
-
-### User Management
-- **Authentication**: Secure JWT-based authentication
-- **Role-based Access**: Support for user, mentor, moderator, and admin roles
-- **Profile Management**: Comprehensive user profiles with skills, interests, and regional preferences
-- **Multi-language Support**: English, French, Swahili, Arabic
-
-### Educational Resources
-- **Resource Library**: Curated educational content across multiple categories
-- **Search & Filter**: Advanced filtering by category, region, and keywords
-- **Author Attribution**: Resources attributed to verified mentors and experts
-- **View Tracking**: Analytics on resource engagement
-
-### Events & Workshops
-- **Event Management**: Create, manage, and participate in events
-- **Hybrid Events**: Support for both physical and virtual events
-- **Registration System**: Automated capacity management and waitlists
-- **Calendar Integration**: Seamless calendar integration
-
-### Mentorship Network
-- **Mentor Matching**: Connect mentors and mentees based on skills and interests
-- **Topic-based Sessions**: Structured mentorship around specific topics
-- **Progress Tracking**: Monitor mentorship journey and outcomes
-- **Communication Tools**: Built-in messaging and session scheduling
-
-### Analytics & Reporting
-- **Admin Dashboard**: Comprehensive analytics for platform administrators
-- **User Engagement**: Track user activity and engagement metrics
-- **Resource Performance**: Monitor resource popularity and effectiveness
-- **Geographic Distribution**: Understand user distribution across regions
+### User Roles
+- **Users** - Access resources, events, and mentorship
+- **Mentors** - Provide guidance and mentorship services
+- **Admins** - Full platform management capabilities
 
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **React 19**: Modern React with hooks and functional components
-- **Vite**: Fast build tool and development server
-- **React Router**: Client-side routing
-- **Tailwind CSS**: Utility-first CSS framework
-- **React Query**: Data fetching and state management
-- **Zustand**: Lightweight state management
-- **React Hook Form**: Form handling and validation
-- **Lucide React**: Beautiful icon library
+- **React 19.2.0** - Modern React with hooks and concurrent features
+- **Vite 7.2.2** - Fast build tool and dev server
+- **React Router 6.20.0** - Client-side routing
+- **React Query 5.8.4** - Data fetching and state management
+- **Tailwind CSS 3.3.5** - Utility-first CSS framework
+- **Lucide React** - Beautiful icon library
+- **React Hook Form** - Form handling and validation
+- **Axios** - HTTP client for API requests
+- **React Hot Toast** - Toast notifications
+- **Zustand** - Lightweight state management
+- **Date-fns** - Date manipulation utilities
 
 ### Backend
-- **Node.js**: JavaScript runtime environment
-- **Express.js**: Web application framework
-- **MongoDB**: NoSQL database with Mongoose ODM
-- **JWT**: JSON Web Tokens for authentication
-- **bcryptjs**: Password hashing
-- **Helmet**: Security middleware
-- **CORS**: Cross-Origin Resource Sharing
-- **Express Rate Limit**: API rate limiting
-- **Express Mongo Sanitize**: NoSQL injection protection
+- **Node.js** - JavaScript runtime
+- **Express.js 5.1.0** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose 8.19.3** - MongoDB object modeling
+- **JSON Web Tokens (JWT)** - Authentication tokens
+- **Express Rate Limiter** - API rate limiting
+- **CORS** - Cross-Origin Resource Sharing
+- **Helmet.js** - Security middleware
+- **Express Mongo Sanitize** - MongoDB injection prevention
 
 ### Development Tools
-- **ESLint**: Code linting and formatting
-- **Vitest**: Frontend testing framework
-- **Jest**: Backend testing framework
-- **Supertest**: API testing
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Autoprefixer** - CSS vendor prefixing
+- **Vitest** - Unit testing framework
 
-## 📁 Project Structure
-
-```
-mern-final-project-Ab494/
-├── backend/                 # Backend application
-│   ├── config/             # Database and cloud configuration
-│   ├── controllers/        # Route controllers
-│   ├── middleware/         # Custom middleware
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── utils/              # Utility functions and seed data
-│   └── server.js           # Express server entry point
-├── frontend/               # Frontend application
-│   ├── src/
-│   │   ├── components/     # Reusable React components
-│   │   ├── context/        # React context providers
-│   │   ├── pages/          # Page components
-│   │   ├── services/       # API service functions
-│   │   ├── utils/          # Utility functions
-│   │   └── main.jsx        # React app entry point
-│   ├── public/             # Static assets
-│   └── package.json
-├── package.json            # Root package configuration
-└── README.md              # This file
-```
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-
-- **Node.js** (v18 or higher)
-- **MongoDB** (local installation or MongoDB Atlas account)
-- **npm** or **yarn**
+- Node.js (v16 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn package manager
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd mern-final-project-Ab494
+   git clone https://github.com/your-username/women-empowerment-portal.git
+   cd women-empowerment-portal
    ```
 
-2. **Install dependencies**
+2. **Install backend dependencies**
    ```bash
-   # Install root dependencies
-   npm install
-   
-   # Install backend dependencies
-   cd backend
-   npm install
-   
-   # Install frontend dependencies
-   cd ../frontend
    npm install
    ```
 
-3. **Set up environment variables**
+3. **Install frontend dependencies**
    ```bash
-   # Backend (.env)
-   NODE_ENV=development
-   PORT=5000
+   cd frontend
+   npm install --legacy-peer-deps
+   ```
+
+4. **Environment Setup**
+
+   **Backend (.env)**
+   ```env
+   # Database
    MONGODB_URI=mongodb://localhost:27017/women-empowerment
-   JWT_SECRET=your-super-secret-jwt-key
-   FRONTEND_URL=http://localhost:5173
    
-   # Frontend (.env)
+   # JWT
+   JWT_SECRET=your-super-secret-jwt-key
+   
+   # Server
+   PORT=5000
+   FRONTEND_URL=http://localhost:5174
+   
+   # File Upload (Cloudinary)
+   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_API_KEY=your-api-key
+   CLOUDINARY_API_SECRET=your-api-secret
+   ```
+
+   **Frontend (.env)**
+   ```env
    VITE_API_URL=http://localhost:5000/api
    ```
 
-4. **Start MongoDB**
+5. **Start the development servers**
+
+   **Backend (Terminal 1)**
    ```bash
-   # If using local MongoDB
-   sudo systemctl start mongod
-   
-   # Or use MongoDB Compass/Atlas
+   npm run dev
    ```
 
-5. **Seed the database** (optional, for demo data)
+   **Frontend (Terminal 2)**
    ```bash
-   cd backend
-   node utils/seedData.js
-   ```
-
-6. **Start the development servers**
-   ```bash
-   # Terminal 1: Backend
-   cd backend
-   npm start
-   
-   # Terminal 2: Frontend
    cd frontend
    npm run dev
    ```
 
-7. **Access the application**
-   - Frontend: http://localhost:5173
+6. **Access the application**
+   - Frontend: http://localhost:5174
    - Backend API: http://localhost:5000/api
-   - Health Check: http://localhost:5000/api/health
+   - API Health Check: http://localhost:5000/api/health
 
-### Demo Credentials
+## 📁 Project Structure
 
-After seeding the database, you can use these test accounts:
-
-- **Admin**: admin@portal.com / password123
-- **Mentor**: sarah@portal.com / password123
-- **Mentor**: amina@portal.com / password123
-- **User**: maria@portal.com / password123
-
-## 🔧 Environment Setup
-
-### Development
-
-The project uses separate `.env` files for backend and frontend:
-
-**Backend (.env)**
-```env
-NODE_ENV=development
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/women-empowerment
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-FRONTEND_URL=http://localhost:5173
+```
+women-empowerment/
+├── README.md
+├── package.json
+├── backend/
+│   ├── package.json
+│   ├── server.js
+│   ├── config/
+│   │   ├── db.js
+│   │   └── cloudinary.js
+│   ├── controllers/
+│   │   ├── analyticsController.js
+│   │   ├── authController.js
+│   │   ├── eventController.js
+│   │   ├── mentorshipController.js
+│   │   ├── resourceController.js
+│   │   └── userController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   ├── errorHandler.js
+│   │   └── rateLimiter.js
+│   ├── models/
+│   │   ├── Event.js
+│   │   ├── Mentorship.js
+│   │   ├── Report.js
+│   │   ├── Resource.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── analytics.js
+│   │   ├── auth.js
+│   │   ├── events.js
+│   │   ├── mentorships.js
+│   │   ├── reports.js
+│   │   ├── resources.js
+│   │   └── users.js
+│   ├── utils/
+│   │   ├── seedData.js
+│   │   └── validation.js
+│   └── .env
+├── frontend/
+│   ├── package.json
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── eslint.config.js
+│   ├── public/
+│   │   └── vite.svg
+│   └── src/
+│       ├── App.jsx
+│       ├── main.jsx
+│       ├── index.css
+│       ├── components/
+│       │   ├── common/
+│       │   │   ├── Button.jsx
+│       │   │   ├── Card.jsx
+│       │   │   ├── Input.jsx
+│       │   │   ├── ProtectedRoute.jsx
+│       │   │   └── Spinner.jsx
+│       │   └── layout/
+│       │       ├── Footer.jsx
+│       │       └── Navbar.jsx
+│       ├── context/
+│       │   ├── AuthContext.jsx
+│       │   └── ThemeContext.jsx
+│       ├── pages/
+│       │   ├── AdminPanel.jsx
+│       │   ├── Dashboard.jsx
+│       │   ├── Events.jsx
+│       │   ├── GetStarted.jsx
+│       │   ├── Home.jsx
+│       │   ├── Login.jsx
+│       │   ├── Mentorship.jsx
+│       │   ├── NotFound.jsx
+│       │   ├── Profile.jsx
+│       │   ├── Register.jsx
+│       │   └── Resources.jsx
+│       ├── services/
+│       │   └── api.js
+│       ├── utils/
+│       │   ├── constants.js
+│       │   └── helpers.js
+│       └── .env
+└── .gitignore
 ```
 
-**Frontend (.env)**
-```env
-# Development
-VITE_API_URL=http://localhost:5000/api
-
-# Production (update when deploying)
-# VITE_API_URL=https://your-backend-api.com/api
-```
-
-### Production
-
-For production deployment, ensure you:
-- Use strong, unique JWT secrets
-- Configure proper MongoDB Atlas connection
-- Set secure environment variables
-- Enable HTTPS
-
-## 📚 API Documentation
+## 🔧 API Documentation
 
 ### Authentication Endpoints
-
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "name": "User Name",
-  "email": "user@example.com",
-  "password": "password123",
-  "role": "user", // user, mentor, moderator, admin
-  "region": "Africa",
-  "skills": ["JavaScript", "Leadership"],
-  "languages": ["English"]
-}
-```
-
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-
-#### Get Current User
-```http
-GET /api/auth/me
-Authorization: Bearer <token>
-```
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - User logout
 
 ### Resource Endpoints
-
-#### Get Resources
-```http
-GET /api/resources
-GET /api/resources?category=Leadership&page=1&limit=10
-```
-
-#### Create Resource (Mentors/Admin only)
-```http
-POST /api/resources
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Resource Title",
-  "summary": "Brief summary",
-  "content": "Full content",
-  "category": "Leadership",
-  "tags": ["business", "career"],
-  "region": "Global"
-}
-```
+- `GET /api/resources` - Get all resources
+- `GET /api/resources/:id` - Get resource by ID
+- `POST /api/resources` - Create new resource (admin/mentor)
+- `PUT /api/resources/:id` - Update resource
+- `DELETE /api/resources/:id` - Delete resource
 
 ### Event Endpoints
-
-#### Get Events
-```http
-GET /api/events
-GET /api/events?category=Conference&status=upcoming
-```
-
-#### Register for Event
-```http
-POST /api/events/:id/register
-Authorization: Bearer <token>
-```
-
-### User Endpoints
-
-#### Get Users (Admin only)
-```http
-GET /api/users
-Authorization: Bearer <token>
-```
-
-#### Update Profile
-```http
-PUT /api/users/profile
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "skills": ["New Skill"],
-  "bio": "Updated bio",
-  "interests": ["New Interest"]
-}
-```
+- `GET /api/events` - Get all events
+- `GET /api/events/:id` - Get event by ID
+- `POST /api/events` - Create new event (admin/mentor)
+- `PUT /api/events/:id` - Update event
+- `DELETE /api/events/:id` - Delete event
 
 ### Mentorship Endpoints
+- `GET /api/mentorships` - Get mentorship connections
+- `POST /api/mentorships` - Request mentorship
+- `PUT /api/mentorships/:id/status` - Update mentorship status
+- `DELETE /api/mentorships/:id` - End mentorship
 
-#### Get Mentorships
-```http
-GET /api/mentorships
-Authorization: Bearer <token>
-```
+### Analytics Endpoints
+- `GET /api/analytics/dashboard` - Get dashboard analytics
+- `GET /api/analytics/users` - User statistics
+- `GET /api/analytics/resources` - Resource analytics
+- `GET /api/analytics/events` - Event analytics
 
-#### Create Mentorship Request
-```http
-POST /api/mentorships
-Authorization: Bearer <token>
-Content-Type: application/json
+## 💻 Frontend Architecture
 
-{
-  "mentorId": "mentor_id",
-  "topics": ["Leadership", "Career Development"],
-  "message": "I would love to learn from you..."
-}
-```
+### Components Structure
+- **Common Components** - Reusable UI components (Button, Card, Input, etc.)
+- **Layout Components** - Navigation, Footer, and page structure
+- **Page Components** - Route-specific page components
+
+### State Management
+- **AuthContext** - User authentication and authorization
+- **ThemeContext** - Dark/light mode switching
+- **React Query** - Server state management
+
+### Routing
+- **Public Routes** - Home, Login, Register, Resources, Events, Mentorship
+- **Protected Routes** - Dashboard, Profile (require authentication)
+- **Admin Routes** - Admin Panel (require admin role)
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary Pink**: #ec4899 (Main brand color)
+- **Secondary Teal**: #14b8a6 (Supporting color)
+- **Gray Scale**: Light to dark grays for text and backgrounds
+- **Success Green**: #10b981
+- **Error Red**: #ef4444
+- **Warning Yellow**: #f59e0b
+
+### Typography
+- **Font Family**: Inter (with fallbacks)
+- **Headings**: Bold weights with gradient effects
+- **Body Text**: Regular weight with proper line heights
+
+### Layout
+- **Container**: Max-width constraints for readability
+- **Grid**: Responsive grid system using Tailwind
+- **Spacing**: Consistent spacing scale throughout
 
 ## 🧪 Testing
 
-### Backend Testing
-
-```bash
-cd backend
-
-# Run unit tests
-npm test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run tests in watch mode
-npm run test:watch
-```
-
 ### Frontend Testing
-
 ```bash
 cd frontend
-
-# Run component tests
-npm test
-
-# Run tests with UI
-npm run test:ui
-
-# Run tests in watch mode
-npm test -- --watch
+npm test              # Run tests
+npm run test:ui       # Run tests with UI
 ```
 
-### Test Coverage
-
-- **Unit Tests**: Individual function and component testing
-- **Integration Tests**: API endpoint testing with Supertest
-- **Component Tests**: React component testing with Vitest
-- **End-to-End Tests**: User flow testing
+### Linting
+```bash
+npm run lint          # Check code quality
+npm run lint:fix      # Auto-fix linting issues
+```
 
 ## 🚀 Deployment
 
-### Backend Deployment (Render/Heroku)
+### Backend Deployment
+1. Set production environment variables
+2. Build the application
+3. Deploy to your preferred hosting service (Heroku, Railway, DigitalOcean)
 
-1. **Prepare for deployment**
-   ```bash
-   # Update environment variables for production
-   NODE_ENV=production
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/women-empowerment
-   JWT_SECRET=secure-production-secret
-   ```
+### Frontend Deployment
+```bash
+cd frontend
+npm run build         # Build for production
+npm run preview       # Preview production build
+```
 
-2. **Deploy to Render**
-   - Connect your GitHub repository
-   - Set build command: `cd backend && npm install`
-   - Set start command: `npm start`
-
-### Frontend Deployment (Vercel/Netlify)
-
-1. **Build for production**
-   ```bash
-   cd frontend
-   npm run build
-   ```
-
-2. **Deploy to Vercel**
-   - Connect your GitHub repository
-   - Set build command: `npm run build`
-   - Set output directory: `dist`
-   - Set environment variables: `VITE_API_URL=https://your-backend-url.com/api`
-
-## 🏗️ Architecture Decisions
-
-### Database Design
-
-The application uses MongoDB with a document-based approach:
-
-- **User Model**: Comprehensive user profiles with nested arrays for skills, interests, and languages
-- **Resource Model**: Hierarchical content with author relationships and tagging
-- **Event Model**: Flexible location handling for both physical and virtual events
-- **Mentorship Model**: Many-to-many relationships between mentors and mentees
-
-### Security Implementation
-
-- **JWT Authentication**: Stateless authentication with secure token handling
-- **Password Hashing**: bcryptjs with salt rounds for secure password storage
-- **Rate Limiting**: Express rate limit to prevent API abuse
-- **Input Validation**: Express validation and sanitization
-- **CORS Configuration**: Proper CORS setup for cross-origin requests
-- **Helmet Security**: Security headers for XSS and clickjacking protection
-
-### State Management
-
-- **Frontend**: Zustand for lightweight state management, React Query for server state
-- **Authentication**: JWT stored in localStorage with automatic token refresh
-- **Real-time Updates**: Polling mechanism for event registrations and notifications
-
-### Performance Optimizations
-
-- **Database Indexing**: Indexes on frequently queried fields (email, region, category)
-- **API Pagination**: Efficient pagination for resource and event lists
-- **Image Optimization**: Lazy loading and optimized image formats
-- **Code Splitting**: Dynamic imports for route-based code splitting
-
-## 🎯 Future Enhancements
-
-### Immediate Improvements
-- [ ] **Real-time Notifications**: WebSocket implementation for instant notifications
-- [ ] **Video Conferencing**: Integration with video calling for mentorship sessions
-- [ ] **Mobile App**: React Native mobile application
-- [ ] **Advanced Analytics**: Machine learning for personalized recommendations
-
-### Long-term Goals
-- [ ] **Multi-language Support**: Full internationalization (i18n)
-- [ ] **Payment Integration**: Subscription management for premium features
-- [ ] **AI Chatbot**: AI-powered assistant for common queries
-- [ ] **Offline Support**: Progressive Web App (PWA) capabilities
-- [ ] **Social Features**: User-generated content and community features
+### Environment Variables (Production)
+Ensure all environment variables are properly set in your production environment.
 
 ## 🤝 Contributing
-
-We welcome contributions to improve the Women Empowerment Portal:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -483,28 +322,40 @@ We welcome contributions to improve the Women Empowerment Portal:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+### Development Guidelines
+- Follow ESLint configuration
+- Write descriptive commit messages
+- Add tests for new features
+- Update documentation as needed
+
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
+## 👥 Contributors & Collaborators
 
-- **Capstone Project Team** - *Initial work* - [Women Empowerment Portal](https://github.com/your-repo)
+### Core Development Team
+- **Marion Kipruto** - *Lead Frontend Developer*
+  📧 [marionrutto21@gmail.com](mailto:mariorutto21@gmail.com)
+
+- **Evans Cheruiyot** - *Lead Backend Developer*
+  📧 [cheruiyotevans6042@gmail.com](mailto:cheruiyotevans6042@gmail.com)
 
 ## 🙏 Acknowledgments
 
-- Inspired by the global movement for women's empowerment
-- Thanks to all mentors and contributors who share their knowledge
-- Built with modern web technologies and best practices
+- React and the React community for the amazing framework
+- Tailwind CSS for the utility-first CSS approach
+- MongoDB for the flexible database solution
+- All contributors and supporters of women's empowerment initiatives
 
 ## 📞 Support
 
-For support and questions:
-
-- **Email**: support@womenempowermentportal.com
-- **Documentation**: [Project Wiki](https://github.com/your-repo/wiki)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
+If you have any questions or need help, please:
+1. Check the documentation above
+2. Search existing issues
+3. Create a new issue with detailed information
+4. Contact the development team
 
 ---
 
-**Built with ❤️ for women's empowerment and education**
+**Built with ❤️ for women empowerment and equality**

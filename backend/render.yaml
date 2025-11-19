@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: women-empowerment-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        fromService:
+          type: web
+          property: host
+    healthCheckPath: /api/health
+    domains:
+      - women-empowerment-api.onrender.com
+
+databases:
+  - name: women-empowerment-db
+    databaseName: women_empowerment
+    user: women_empowerment_user

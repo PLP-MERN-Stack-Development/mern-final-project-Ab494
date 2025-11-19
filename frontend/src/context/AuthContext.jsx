@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -16,7 +15,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     checkAuth();
@@ -54,10 +52,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
         
-        // Invalidate and refetch user-related queries
-        queryClient.invalidateQueries({ queryKey: ['user'] });
-        queryClient.invalidateQueries({ queryKey: ['profile'] });
-        
         toast.success(`Welcome back, ${data.user.name}!`);
         return { success: true, user: data.user };
       } else {
@@ -79,8 +73,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
         
-        queryClient.invalidateQueries({ queryKey: ['user'] });
-        
         toast.success(`Welcome to Women Empowerment Portal, ${data.user.name}!`);
         return { success: true, user: data.user };
       } else {
@@ -97,15 +89,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
-    queryClient.clear(); // Clear all cached data
     toast.success('Logged out successfully');
   };
 
   const updateUser = (updatedUser) => {
     setUser(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));
-    queryClient.invalidateQueries({ queryKey: ['user'] });
-    queryClient.invalidateQueries({ queryKey: ['profile'] });
   };
 
   const value = {

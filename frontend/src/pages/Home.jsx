@@ -1,22 +1,55 @@
 import { Link } from 'react-router-dom';
-import { 
-  Heart, 
-  BookOpen, 
-  Calendar, 
-  Users, 
-  ArrowRight, 
+import { useState, useEffect } from 'react';
+import {
+  Heart,
+  BookOpen,
+  Calendar,
+  Users,
+  ArrowRight,
   Star,
   TrendingUp,
   Globe,
   Award,
-  Play
+  Play,
+  Download,
+  UserPlus
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
+import api from '@/services/api';
+import TestimonialCard from '@/components/TestimonialCard';
+import PartnerCard from '@/components/PartnerCard';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
+  const [testimonials, setTestimonials] = useState([]);
+  const [partners, setPartners] = useState([]);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await api.get('/testimonials', { params: { limit: 3 } });
+        setTestimonials(response.data.testimonials || []);
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+        setTestimonials([]);
+      }
+    };
+
+    const fetchPartners = async () => {
+      try {
+        const response = await api.get('/partners', { params: { limit: 6 } });
+        setPartners(response.data.partners || []);
+      } catch (error) {
+        console.error('Error fetching partners:', error);
+        setPartners([]);
+      }
+    };
+
+    fetchTestimonials();
+    fetchPartners();
+  }, []);
 
   const impactStats = [
     { number: '50,000+', label: 'Women Empowered', icon: Heart },
@@ -52,40 +85,43 @@ const Home = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      role: 'Tech Entrepreneur',
-      content: 'This platform transformed my career journey. The mentorship I received was invaluable.',
-      rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b55c?w=64&h=64&fit=crop&crop=face'
-    },
-    {
-      name: 'Maria Rodriguez',
-      role: 'Healthcare Leader',
-      content: 'The resources and community here gave me the confidence to start my own practice.',
-      rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face'
-    },
-    {
-      name: 'Amara Okafor',
-      role: 'NGO Director',
-      content: 'Through this platform, I found mentors who guided me to leadership roles in my field.',
-      rating: 5,
-      avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=64&h=64&fit=crop&crop=face'
-    }
-  ];
+
+  const handleDownloadResources = () => {
+    // Create a simple text file with resource links
+    const content = `
+Women Empowerment Platform - Resource Collection
+
+Educational Resources:
+- Leadership Development Guide
+- Career Advancement Toolkit
+- Networking Best Practices
+- Salary Negotiation Guide
+- Work-Life Balance Strategies
+
+Visit our platform at https://your-platform.com/resources for more!
+    `;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'women-empowerment-resources.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative gradient-hero py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-warm-500/15 via-primary-500/10 to-vibrant-500/15" />
         <div className="relative container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
               Empower Women,
-              <span className="gradient-primary bg-clip-text text-transparent">
+              <span className="gradient-warm bg-clip-text text-transparent">
                 {' '}Transform Communities
               </span>
             </h1>
@@ -94,7 +130,7 @@ const Home = () => {
               mentorship, and community support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" as={Link} to="/register" className="text-lg px-8">
+              <Button size="lg" as={Link} to="/get-started" className="text-lg px-8">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -155,7 +191,7 @@ const Home = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} hover className="text-center p-8">
+                <Card key={index} hover gradient className="text-center p-8">
                   <div className="flex justify-center mb-6">
                     <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/20 rounded-full flex items-center justify-center">
                       <Icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
@@ -178,8 +214,62 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Stories */}
+      {/* Action Buttons Section */}
       <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Take Action Today
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Ready to make a difference? Get involved with our community
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <Card gradient className="p-6 text-center">
+              <Calendar className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                Register for Event
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Join our upcoming workshops and networking events
+              </p>
+              <Button as={Link} to="/events/register" className="w-full">
+                Register Now
+              </Button>
+            </Card>
+
+            <Card gradient className="p-6 text-center">
+              <UserPlus className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                Request Mentorship
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Connect with experienced mentors for guidance
+              </p>
+              <Button as={Link} to="/mentorship/request" className="w-full">
+                Find Mentor
+              </Button>
+            </Card>
+
+            <Card gradient className="p-6 text-center">
+              <Download className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                Download Resources
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Access our curated collection of helpful materials
+              </p>
+              <Button onClick={handleDownloadResources} className="w-full">
+                Download Now
+              </Button>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Stories */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -190,33 +280,50 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
-                  "{testimonial.content}"
+            {testimonials.length > 0 ? (
+              testimonials.map((testimonial) => (
+                <TestimonialCard key={testimonial._id} testimonial={testimonial} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-8">
+                <p className="text-gray-500 dark:text-gray-400">
+                  Success stories coming soon...
                 </p>
-                <div className="flex items-center">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <div className="font-semibold text-gray-900 dark:text-white">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-gray-500 dark:text-gray-400 text-sm">
-                      {testimonial.role}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            ))}
+              </div>
+            )}
+          </div>
+          <div className="text-center mt-8">
+            <Button as={Link} to="/testimonials" variant="outline">
+              View All Testimonials
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Partners */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Our Partners
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Working together with leading organizations to empower women worldwide
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {partners.length > 0 ? (
+              partners.map((partner) => (
+                <PartnerCard key={partner._id} partner={partner} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-8">
+                <p className="text-gray-500 dark:text-gray-400">
+                  Partner organizations coming soon...
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

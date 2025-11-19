@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import { motion } from 'framer-motion';
 import { cn } from '@/utils/helpers';
 
 const Card = forwardRef(({
@@ -8,6 +7,7 @@ const Card = forwardRef(({
   hover = false,
   padding = 'default',
   shadow = 'md',
+  gradient = false,
   ...props
 }, ref) => {
   const paddingStyles = {
@@ -26,38 +26,21 @@ const Card = forwardRef(({
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={hover ? { 
-        y: -8,
-        scale: 1.02,
-        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-        transition: { type: "spring", stiffness: 300, damping: 20 }
-      } : {}}
-      whileTap={hover ? { 
-        scale: 0.98,
-        transition: { type: "spring", stiffness: 400, damping: 10 }
-      } : {}}
       className={cn(
         'bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700',
         'transition-shadow duration-300',
         shadowStyles[shadow],
-        hover && 'cursor-pointer',
+        hover && 'hover:shadow-lg hover:-translate-y-1',
+        gradient && 'bg-gradient-to-br from-warm-50 to-vibrant-50 dark:from-gray-800 dark:to-gray-900',
         paddingStyles[padding],
         className
       )}
       {...props}
     >
-      <motion.div
-        initial={false}
-        animate={hover ? { scale: 1 } : { scale: 1 }}
-        transition={{ duration: 0.2 }}
-      >
-        {children}
-      </motion.div>
-    </motion.div>
+      {children}
+    </div>
   );
 });
 

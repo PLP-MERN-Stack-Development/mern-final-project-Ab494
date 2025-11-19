@@ -6,14 +6,6 @@ import mongoSanitize from 'express-mongo-sanitize';
 import connectDB from './config/db.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
-import { 
-  logError, 
-  monitorPerformance, 
-  healthCheck, 
-  getErrorLogs, 
-  getPerformanceMetrics 
-} from './middleware/monitoring.js';
-import { protect } from './middleware/auth.js';
 
 // Route imports
 import authRoutes from './routes/auth.js';
@@ -23,6 +15,11 @@ import eventRoutes from './routes/events.js';
 import mentorshipRoutes from './routes/mentorships.js';
 import reportRoutes from './routes/reports.js';
 import analyticsRoutes from './routes/analytics.js';
+import adviceRoutes from './routes/advice.js';
+import testimonialRoutes from './routes/testimonials.js';
+import partnerRoutes from './routes/partners.js';
+import subscriberRoutes from './routes/subscribers.js';
+import User from './models/User.js';
 
 dotenv.config();
 
@@ -35,7 +32,15 @@ connectDB();
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: [
+    process.env.FRONTEND_URL || 'https://women-empowermentsdgs.netlify.app/',
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    'http://127.0.0.1:3000'
+  ],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -43,15 +48,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(mongoSanitize());
 app.use(generalLimiter);
 
-// Add performance monitoring
-app.use(monitorPerformance);
-
-// Enhanced health check with monitoring data
-app.get('/api/health', healthCheck);
-
-// Monitoring routes (Admin only)
-app.get('/api/monitoring/errors', protect, getErrorLogs);
-app.get('/api/monitoring/performance', protect, getPerformanceMetrics);
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Women Empowerment Portal API' });
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -61,23 +61,14 @@ app.use('/api/events', eventRoutes);
 app.use('/api/mentorships', mentorshipRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/advice', adviceRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/partners', partnerRoutes);
+app.use('/api/subscribers', subscriberRoutes);
 
-// Error handling middleware
-app.use(logError);
+// Error handler
 app.use(errorHandler);
-
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ 
-    success: false, 
-    message: 'Route not found' 
-  });
-});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Monitoring endpoints available at /api/monitoring/*`);
 });
-
-// Export app for testing
-export default app;

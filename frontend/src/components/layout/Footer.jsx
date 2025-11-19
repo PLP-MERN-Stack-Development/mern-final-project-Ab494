@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,16 +27,17 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' }
+    { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com' },
+    { name: 'Twitter', icon: Twitter, href: 'https://www.twitter.com' },
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com' },
+    { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com' }
   ];
 
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
@@ -114,6 +116,11 @@ const Footer = () => {
                 <span className="text-gray-400 text-sm">Global Impact Network</span>
               </div>
             </div>
+          </div>
+
+          {/* Newsletter Signup */}
+          <div className="lg:col-span-1">
+            <NewsletterSignup />
           </div>
         </div>
 

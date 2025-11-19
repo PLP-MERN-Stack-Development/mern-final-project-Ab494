@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { 
   BookOpen, 
@@ -134,16 +135,40 @@ const Dashboard = () => {
               Quick Actions
             </h2>
             <div className="space-y-3">
-              <Button fullWidth variant="outline" icon={BookOpen}>
+              <Button 
+                fullWidth 
+                variant="outline" 
+                icon={BookOpen}
+                as={Link}
+                to="/resources"
+              >
                 Browse Resources
               </Button>
-              <Button fullWidth variant="outline" icon={Calendar}>
+              <Button 
+                fullWidth 
+                variant="outline" 
+                icon={Calendar}
+                as={Link}
+                to="/events"
+              >
                 View Upcoming Events
               </Button>
-              <Button fullWidth variant="outline" icon={Users}>
+              <Button 
+                fullWidth 
+                variant="outline" 
+                icon={Users}
+                as={Link}
+                to="/mentorship"
+              >
                 Find Mentors
               </Button>
-              <Button fullWidth variant="outline" icon={Target}>
+              <Button 
+                fullWidth 
+                variant="outline" 
+                icon={Target}
+                as={Link}
+                to="/goals/new"
+              >
                 Set New Goal
               </Button>
             </div>

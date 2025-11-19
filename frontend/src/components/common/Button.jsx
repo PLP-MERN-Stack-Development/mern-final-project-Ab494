@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/utils/helpers';
 
 const Button = forwardRef(({
@@ -14,56 +14,68 @@ const Button = forwardRef(({
   iconPosition = 'left',
   fullWidth = false,
   type = 'button',
+  as: Component = 'button',
+  to,
   ...props
 }, ref) => {
   const baseStyles = `
-    inline-flex items-center justify-center 
-    font-medium rounded-lg transition-all duration-200 
-    focus:outline-none focus:ring-2 focus:ring-offset-2 
+    inline-flex items-center justify-center
+    font-medium rounded-lg transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-offset-2
     disabled:opacity-50 disabled:cursor-not-allowed
     ${fullWidth ? 'w-full' : ''}
   `;
   
   const variants = {
     primary: `
-      bg-primary-600 text-white 
+      bg-primary-600 text-white
       hover:bg-primary-700 focus:ring-primary-500
       active:bg-primary-800
     `,
     secondary: `
-      bg-secondary-600 text-white 
+      bg-secondary-600 text-white
       hover:bg-secondary-700 focus:ring-secondary-500
       active:bg-secondary-800
     `,
     outline: `
-      border-2 border-primary-600 text-primary-600 
+      border-2 border-primary-600 text-primary-600
       hover:bg-primary-50 focus:ring-primary-500
       dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-900/50
       active:bg-primary-100 dark:active:bg-primary-900
     `,
     ghost: `
-      text-primary-600 
+      text-primary-600
       hover:bg-primary-50 focus:ring-primary-500
       dark:text-primary-400 dark:hover:bg-primary-900/50
       active:bg-primary-100 dark:active:bg-primary-900
     `,
     danger: `
-      bg-red-600 text-white 
+      bg-red-600 text-white
       hover:bg-red-700 focus:ring-red-500
       active:bg-red-800
     `,
     success: `
-      bg-green-600 text-white 
+      bg-green-600 text-white
       hover:bg-green-700 focus:ring-green-500
       active:bg-green-800
     `,
     warning: `
-      bg-yellow-600 text-white 
+      bg-yellow-600 text-white
       hover:bg-yellow-700 focus:ring-yellow-500
       active:bg-yellow-800
     `,
+    warm: `
+      bg-warm-600 text-white
+      hover:bg-warm-700 focus:ring-warm-500
+      active:bg-warm-800
+    `,
+    vibrant: `
+      bg-vibrant-600 text-white
+      hover:bg-vibrant-700 focus:ring-vibrant-500
+      active:bg-vibrant-800
+    `,
     link: `
-      text-primary-600 
+      text-primary-600
       hover:underline focus:ring-primary-500
       dark:text-primary-400
       p-0 h-auto
@@ -86,18 +98,26 @@ const Button = forwardRef(({
 
   const isDisabled = disabled || loading;
 
+  // If Component is 'Link' or the component itself is Link, use Link from react-router-dom
+  const FinalComponent = Component === 'button' ? 'button' :
+                        Component === 'a' ? 'a' :
+                        Component === Link ? Link : Component;
+
+  const buttonProps = Component === 'button' ? {
+    type,
+    disabled: isDisabled
+  } : {};
+
+  const linkProps = Component === Link || FinalComponent === Link ? {
+    to,
+    ...props
+  } : {
+    ...props
+  };
+
   return (
-    <motion.button
+    <FinalComponent
       ref={ref}
-      type={type}
-      whileHover={!isDisabled ? { 
-        scale: 1.02,
-        transition: { type: "spring", stiffness: 400, damping: 10 }
-      } : {}}
-      whileTap={!isDisabled ? { 
-        scale: 0.98,
-        transition: { type: "spring", stiffness: 400, damping: 10 }
-      } : {}}
       className={cn(
         baseStyles,
         variants[variant],
@@ -105,43 +125,23 @@ const Button = forwardRef(({
         isDisabled && 'cursor-not-allowed',
         className
       )}
-      disabled={isDisabled}
-      {...props}
+      {...buttonProps}
+      {...linkProps}
     >
-      <motion.div
-        initial={false}
-        animate={loading ? { opacity: 0.7 } : { opacity: 1 }}
-        transition={{ duration: 0.2 }}
-        className="flex items-center justify-center"
-      >
-        {loading ? (
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          >
-            <Loader2 className={cn(iconSizes[size])} />
-          </motion.div>
-        ) : (
-          <>
-            {Icon && iconPosition === 'left' && (
-              <motion.div
-                whileHover={!isDisabled ? { x: -2, transition: { type: "spring", stiffness: 400 } } : {}}
-              >
-                <Icon className={cn(iconSizes[size], children ? 'mr-2' : '')} />
-              </motion.div>
-            )}
-            {children}
-            {Icon && iconPosition === 'right' && (
-              <motion.div
-                whileHover={!isDisabled ? { x: 2, transition: { type: "spring", stiffness: 400 } } : {}}
-              >
-                <Icon className={cn(iconSizes[size], children ? 'ml-2' : '')} />
-              </motion.div>
-            )}
-          </>
-        )}
-      </motion.div>
-    </motion.button>
+      {loading ? (
+        <Loader2 className={cn(iconSizes[size], 'animate-spin')} />
+      ) : (
+        <>
+          {Icon && iconPosition === 'left' && (
+            <Icon className={cn(iconSizes[size], children ? 'mr-2' : '')} />
+          )}
+          {children}
+          {Icon && iconPosition === 'right' && (
+            <Icon className={cn(iconSizes[size], children ? 'ml-2' : '')} />
+          )}
+        </>
+      )}
+    </FinalComponent>
   );
 });
 

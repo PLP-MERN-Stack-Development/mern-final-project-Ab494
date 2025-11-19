@@ -40,9 +40,26 @@ api.interceptors.response.use(
     } else if (response?.status >= 500) {
       toast.error('Server error. Please try again later.');
     } else if (response?.data?.message) {
-      toast.error(response.data.message);
+      // Show specific error message from server
+      const message = response.data.message;
+      if (message.includes('already exists') || message.includes('already registered')) {
+        toast.error('This email is already registered. Please use a different email or try logging in.');
+      } else if (message.includes('required')) {
+        toast.error('Please fill in all required fields.');
+      } else if (message.includes('6 characters')) {
+        toast.error('Password must be at least 6 characters long.');
+      } else {
+        toast.error(message);
+      }
+    } else if (error.message) {
+      // Handle network errors or other connection issues
+      if (error.message.includes('Network Error') || error.message.includes('CORS')) {
+        toast.error('Connection error. Please check your internet connection and try again.');
+      } else {
+        toast.error(error.message);
+      }
     } else {
-      toast.error('An unexpected error occurred.');
+      toast.error('Registration failed. Please try again.');
     }
     
     return Promise.reject(error);

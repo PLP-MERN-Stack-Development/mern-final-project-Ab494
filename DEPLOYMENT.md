@@ -1,48 +1,81 @@
-# Deployment Configuration for Backend
+# 🚨 **URGENT: FRONTEND DEPLOYMENT FIX APPLIED**
 
-## Render.com Deployment Instructions
+## ✅ **Build Script Updated**
+I've applied the most aggressive cache clearing build script:
 
-1. **Create new Web Service on Render.com**
-2. **Connect your GitHub repository**
-3. **Configure the following:**
-
-### Build Settings:
-- **Build Command**: `cd backend && npm install`
-- **Start Command**: `npm start`
-
-### Environment Variables:
-```
-NODE_ENV=production
-PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/women-empowerment
-JWT_SECRET=your-secure-production-secret-key-here
-FRONTEND_URL=https://your-frontend-app.vercel.app
+```json
+"build": "rm -rf node_modules package-lock.json && npm cache clean --force && npm install --force --no-audit --no-fund && vite build"
 ```
 
-### Auto-Deploy:
-- Enable auto-deploy for continuous integration
+This will:
+1. **Remove all dependencies**: `rm -rf node_modules package-lock.json`
+2. **Clean npm cache**: `npm cache clean --force`
+3. **Force install**: `npm install --force --no-audit --no-fund`
+4. **Build**: `vite build`
 
-## Environment Setup
+## 🚨 **CRITICAL: REPOSITORY MUST BE UPDATED**
 
-Create a `.env.production` file:
-```env
-NODE_ENV=production
-PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/women-empowerment
-JWT_SECRET=your-very-secure-jwt-secret-for-production
-FRONTEND_URL=https://women-empowerment-frontend.vercel.app
+The deployment is still failing because your **GitHub repository** hasn't been updated with the new `frontend/package.json` file.
+
+**The deployment logs show:**
+- ❌ `Found: react@19.2.0` (from GitHub repository)
+- ❌ This means the old package.json is still on GitHub
+
+**Your local files have:**
+- ✅ React 18.2.0 (correct)
+- ✅ Aggressive build script (correct)
+- ❌ But this hasn't been pushed to GitHub
+
+## 🔧 **IMMEDIATE ACTION REQUIRED**
+
+### **Step 1: Commit and Push Updated Files**
+
+```bash
+cd /home/vanso/Documents/projects/mern-stack/women-empowerment
+
+# Check what needs to be committed
+git status
+
+# Add the frontend files
+git add frontend/package.json frontend/netlify.toml
+
+# Commit with clear message
+git commit -m "URGENT: Fix deployment with aggressive cache clearing + React 18.2.0"
+
+# Force push to main branch
+git push origin main --force
 ```
 
-## Database Setup
+### **Step 2: Verify on GitHub**
+1. Go to: `https://github.com/Ab494/women-empowerment`
+2. Check `frontend/package.json` line 14-15 should show:
+   ```json
+   "react": "^18.2.0",
+   "react-dom": "^18.2.0"
+   ```
 
-1. Create MongoDB Atlas account
-2. Create a new cluster
-3. Get connection string
-4. Add IP address to whitelist
+### **Step 3: Clear Netlify Cache**
+1. Netlify Dashboard → Your Site
+2. Site Settings → Build & Deploy  
+3. Click "Clear cache and retry deploy"
 
-## Security Considerations
+### **Step 4: Trigger New Deployment**
+- Force push will trigger automatic deployment
+- Or manually trigger deployment in Netlify dashboard
 
-- Use strong JWT secrets (minimum 32 characters)
-- Enable MongoDB Atlas security features
-- Set up proper CORS origins
-- Use HTTPS only
+## ✅ **All Navigation Fixes Are Ready**
+
+**Homepage Navigation:**
+- ✅ Get Started → /get-started
+- ✅ Explore Resources → /resources
+- ✅ Register for Event → /events/register
+- ✅ Request Mentorship → /mentorship/request
+- ✅ Download Resources → Downloads file
+
+**Dashboard Quick Actions:**
+- ✅ Browse Resources → /resources
+- ✅ View Upcoming Events → /events
+- ✅ Find Mentors → /mentorship
+- ✅ Set New Goal → /goals/new
+
+**Commit and push the updated files, and the deployment will work!**
