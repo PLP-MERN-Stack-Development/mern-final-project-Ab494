@@ -6,6 +6,8 @@
 
 A comprehensive MERN stack platform designed to empower women through education, mentorship, and community building. This platform provides resources, organizes events, facilitates mentorship connections, and tracks progress toward career advancement.
 
+> **⚠️ Important Note:** This project was built with teammates for the final project and was brought up to week 8 assignment standards to match week requirements. Therefore, other teammates might submit the same project.
+
 ## 🌟 Features
 
 ### Core Functionality
