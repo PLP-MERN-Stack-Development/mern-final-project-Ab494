@@ -14,10 +14,11 @@ This capstone project addresses the global need for accessible education and men
 
 ## 🚀 Live Demo
 
-**Frontend**: [https://women-empowerment-portal.vercel.app](https://women-empowerment-portal.vercel.app)
-**Backend API**: [https://women-empowerment-api.onrender.com/api](https://women-empowerment-api.onrender.com/api)
+**Frontend**: [https://womenempowerhub2.netlify.app](https://womenempowerhub2.netlify.app)
 
-*Note: Replace with actual deployment URLs when ready*
+**Backend API**: Available upon request - contact the development team
+
+*Live application deployed and accessible*
 
 ## 📋 Table of Contents
 
