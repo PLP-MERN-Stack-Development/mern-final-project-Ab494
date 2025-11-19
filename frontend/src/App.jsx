@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import PageTransition from './components/common/PageTransition';
 
 // Import pages
 import Home from './pages/Home';
@@ -38,49 +39,60 @@ const queryClient = new QueryClient({
   }
 });
 
+// Component that uses the location hook
+function AppContent() {
+  const location = useLocation();
+  
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <Navbar />
+      <main className="flex-1">
+        <PageTransition location={location}>
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/mentorship" element={<Mentorship />} />
+            
+            {/* Protected routes */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            
+            {/* Admin routes */}
+            <Route path="/admin/*" element={
+              <ProtectedRoute roles={['admin']}>
+                <AdminPanel />
+              </ProtectedRoute>
+            } />
+            
+            {/* 404 page */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
           <Router>
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-              <Navbar />
-              <main className="flex-1">
-                <Routes>
-                  {/* Public routes */}
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/resources" element={<Resources />} />
-                  <Route path="/events" element={<Events />} />
-                  <Route path="/mentorship" element={<Mentorship />} />
-                  
-                  {/* Protected routes */}
-                  <Route path="/dashboard" element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/profile" element={
-                    <ProtectedRoute>
-                      <Profile />
-                    </ProtectedRoute>
-                  } />
-                  
-                  {/* Admin routes */}
-                  <Route path="/admin/*" element={
-                    <ProtectedRoute roles={['admin']}>
-                      <AdminPanel />
-                    </ProtectedRoute>
-                  } />
-                  
-                  {/* 404 page */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
+            <AppContent />
             <Toaster
               position="top-right"
               toastOptions={{
@@ -109,3 +121,4 @@ function App() {
 }
 
 export default App;
+

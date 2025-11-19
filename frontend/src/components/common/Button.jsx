@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/utils/helpers';
 
@@ -86,9 +87,17 @@ const Button = forwardRef(({
   const isDisabled = disabled || loading;
 
   return (
-    <button
+    <motion.button
       ref={ref}
       type={type}
+      whileHover={!isDisabled ? { 
+        scale: 1.02,
+        transition: { type: "spring", stiffness: 400, damping: 10 }
+      } : {}}
+      whileTap={!isDisabled ? { 
+        scale: 0.98,
+        transition: { type: "spring", stiffness: 400, damping: 10 }
+      } : {}}
       className={cn(
         baseStyles,
         variants[variant],
@@ -99,20 +108,40 @@ const Button = forwardRef(({
       disabled={isDisabled}
       {...props}
     >
-      {loading ? (
-        <Loader2 className={cn(iconSizes[size], 'animate-spin')} />
-      ) : (
-        <>
-          {Icon && iconPosition === 'left' && (
-            <Icon className={cn(iconSizes[size], children ? 'mr-2' : '')} />
-          )}
-          {children}
-          {Icon && iconPosition === 'right' && (
-            <Icon className={cn(iconSizes[size], children ? 'ml-2' : '')} />
-          )}
-        </>
-      )}
-    </button>
+      <motion.div
+        initial={false}
+        animate={loading ? { opacity: 0.7 } : { opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        className="flex items-center justify-center"
+      >
+        {loading ? (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          >
+            <Loader2 className={cn(iconSizes[size])} />
+          </motion.div>
+        ) : (
+          <>
+            {Icon && iconPosition === 'left' && (
+              <motion.div
+                whileHover={!isDisabled ? { x: -2, transition: { type: "spring", stiffness: 400 } } : {}}
+              >
+                <Icon className={cn(iconSizes[size], children ? 'mr-2' : '')} />
+              </motion.div>
+            )}
+            {children}
+            {Icon && iconPosition === 'right' && (
+              <motion.div
+                whileHover={!isDisabled ? { x: 2, transition: { type: "spring", stiffness: 400 } } : {}}
+              >
+                <Icon className={cn(iconSizes[size], children ? 'ml-2' : '')} />
+              </motion.div>
+            )}
+          </>
+        )}
+      </motion.div>
+    </motion.button>
   );
 });
 
