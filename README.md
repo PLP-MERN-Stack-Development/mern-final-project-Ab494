@@ -12,6 +12,10 @@ This capstone project addresses the global need for accessible education and men
 - Track their progress and growth
 - Contribute their own expertise and knowledge
 
+## 🎓 Academic Context
+
+**Important Note**: This project was developed as a team capstone project and was brought forward to Week 8 ahead of schedule. As a collaborative effort with teammates, other team members may submit similar versions of this project for their academic submissions. This Women Empowerment Portal represents our team's contribution to the final project requirements.
+
 ## 🚀 Live Demo
 
 **Frontend**: [https://womenempowerhub2.netlify.app](https://womenempowerhub2.netlify.app)
